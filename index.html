@@ -1,10 +1,31 @@
 <html>
-  <title>
-    hallo
-  </title>
- <body>
-  <h1>
-    bitte funktionier
-  </h1>
-   </body>
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/receiver.css" />
+    </head>
+<body>
+    <div class="messages">
+        <h1>Waiting for Messages...</h1>
+    </div>
+</body>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
+<script src="messageTypes.js"></script>
+<script>
+    $(function() {
+        var receiver = new cast.receiver.Receiver('73C2A73A', ['OneDown']),
+            channelHandler = new cast.receiver.ChannelHandler('OneDown'),
+            $messages = $('.messages');
+
+        channelHandler.addChannelFactory(
+            receiver.createChannelFactory('OneDown'));
+
+        receiver.start();
+
+        channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
+
+        function onMessage(event) {
+            $messages.html(event.message.type);
+        }
+    });
+</script>
 </html>
