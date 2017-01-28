@@ -12,13 +12,13 @@
 <script src="https://www.gstatic.com/cast/js/receiver/1.0/cast_receiver.js"></script>
 <script>
 	$(function() {
-		var receiver = new cast.receiver.Receiver('7A02208A', ['countdowndata']),
-			channelHandler = new cast.receiver.ChannelHandler('countdowndata'),
+		var receiver = new cast.receiver.Receiver('7A02208A', ['urn:x-cast:countdowndata']),
+			channelHandler = new cast.receiver.ChannelHandler('urn:x-cast:countdowndata'),
 			$messages = $('.messages'),
 			$body = $('body');
 		
 		channelHandler.addChannelFactory(
-			receiver.createChannelFactory('countdowndata'));
+			receiver.createChannelFactory('urn:x-cast:countdowndata'));
 		receiver.start();
 		channelHandler.addEventListener(cast.receiver.Channel.EventType.MESSAGE, onMessage.bind(this));
 		function onMessage(event) {
