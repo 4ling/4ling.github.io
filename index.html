@@ -25,24 +25,26 @@
   <body>
 	<DIV id="message">remaining heartbeats</DIV>
     
-  </body>
+  
 	<script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
 	<script type="text/javascript">	
-		//window.onload = function() {
-		////var receiver = new cast.receiver.Receiver('7A02208A', ['urn:x-cast:countdowndata']),
-		//channelHandler = new cast.receiver.ChannelHandler('urn:x-cast:countdowndata'),
-		//channelHandler.addChannelFactory(receiver.createChannelFactory('urn:x-cast:countdowndata'));
-		//receiver.start();
+		window.onload = function() {
+		var receiver = new cast.receiver.Receiver('7A02208A', ['urn:x-cast:countdowndata']),
+		channelHandler = new cast.receiver.ChannelHandler('urn:x-cast:countdowndata'),
+		channelHandler.addChannelFactory(receiver.createChannelFactory('urn:x-cast:countdowndata'));
+		receiver.start();
 		
 		
 		
 			
-		//function displayText(text) {
-		//function displayText(text) {
-       		//document.getElementById("message").innerHTML=text;
-        	//window.castReceiverManager.setApplicationState(text);
-     		//};
+		function displayText(text) {
+		function displayText(text) {
+       		document.getElementById("message").innerHTML=text;
+        	window.castReceiverManager.setApplicationState(text);
+     		};
 		}
 	</script>
+	
+	</body>
 </html>
 
