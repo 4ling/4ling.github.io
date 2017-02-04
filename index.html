@@ -48,13 +48,9 @@
           	window.castReceiverManager.getCastMessageBus('urn:x-cast:countdowndata');
 		window.messageBus.onMessage = function(event) {
           	displayText(event.data);
+		};
 
-        }
 
-        // initialize the CastReceiverManager with an application status message
-        window.castReceiverManager.start({statusText: "Application is starting"});
-        console.log('Receiver Manager started');
-      };
 	
 			
 			
