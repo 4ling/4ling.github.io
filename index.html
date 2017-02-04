@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,7 +35,6 @@
 		
 			
 		
-
 			
 		castReceiverManager.onSenderDisconnected = function(event) {
        		if (window.castReceiverManager.getSenders().length == 0) {
@@ -48,9 +46,9 @@
           	window.castReceiverManager.getCastMessageBus('urn:x-cast:countdowndata');
 		window.messageBus.onMessage = function(event) {
           	displayText(event.data);
+        	}
+                window.castReceiverManager.start({statusText: "Application is starting"});
 		};
-
-
 	
 			
 			
@@ -64,4 +62,3 @@
 	
 	</body>
 </html>
-
