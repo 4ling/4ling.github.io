@@ -23,7 +23,7 @@
     <title>onedown</title>
   </head>
   <body>
-	<DIV id="message">65463082</DIV>
+	<DIV id="message">remaining heartbeats</DIV>
     
   </body>
 	<script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
@@ -32,22 +32,10 @@
 		var receiver = new cast.receiver.Receiver('7A02208A', ['urn:x-cast:countdowndata']),
 		channelHandler = new cast.receiver.ChannelHandler('urn:x-cast:countdowndata'),
 		channelHandler.addChannelFactory(receiver.createChannelFactory('urn:x-cast:countdowndata'));
-		receiver.start();
-		window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
+		//receiver.start();
 		
-		window.messageBus =
-          	window.castReceiverManager.getCastMessageBus(
-                'urn:x-cast:countdowndata');
-
-       		 // handler for the CastMessageBus message event
-       		window.messageBus.onMessage = function(event) {
-          	console.log('Message [' + event.senderId + ']: ' + event.data);
-          // display the message from the sender
-         	displayText(event.data);
-          // inform all senders on the CastMessageBus of the incoming message event
-          // sender message listener will be invoked
-          	window.messageBus.send(event.senderId, event.data);
-        	};	
+		
+		
 			
 		function displayText(text) {
        		document.getElementById("message").innerHTML=text;
