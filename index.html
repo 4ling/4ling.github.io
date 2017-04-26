@@ -43,7 +43,7 @@ This document includes the layout for the Cast screen and sets the output to the
     <title>onedown</title>
   </head>
   <body>
-	  //startmessage
+	  
 	<DIV id="message">used heartbeats  <HR NOSHADE SIZE=1> <td style="vertical-align:top"> remaining heartbeats</td></DIV>
     
   
@@ -53,26 +53,48 @@ This document includes the layout for the Cast screen and sets the output to the
 		cast.receiver.logger.setLevelValue(0);
         	window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
 		
-		        castReceiverManager.onReady = function(event) {
-          console.log('Received Ready event: ' + JSON.stringify(event.data));
-          window.castReceiverManager.setApplicationState("Application status is ready...");
-        };
+			
+		 // handler for the 'ready' event	
+		castReceiverManager.onReady = function(event) {
+          	console.log('Received Ready event: ' + JSON.stringify(event.data));
+          	window.castReceiverManager.setApplicationState("Application status is ready...");
+        	};
 		
 			
 		
+       		 // handler for 'senderconnected' event
+   		castReceiverManager.onSenderConnected = function(event) {
+         	console.log('Received Sender Connected event: ' + event.data);
+       		console.log(window.castReceiverManager.getSender(event.data).userAgent);
+       		 };
 			
+   	     // handler for 'senderdisconnected' event		
 		castReceiverManager.onSenderDisconnected = function(event) {
        		if (window.castReceiverManager.getSenders().length == 0) {
 	        window.close();
 	     	}
         	};
 		
+			
+		
+       		// handler for 'systemvolumechanged' event
+       		castReceiverManager.onSystemVolumeChanged = function(event) {
+      		console.log('Received System Volume Changed event: ' + event.data['level'] + ' ' +
+                event.data['muted']);
+       		};	
+		
+		// create a CastMessageBus to handle messages for a custom namespace
 		window.messageBus =
           	window.castReceiverManager.getCastMessageBus('urn:x-cast:countdowndata');
+		// handler for the CastMessageBus message event
 		window.messageBus.onMessage = function(event) {
+		// display the message from the sender
           	displayText(event.data);
         	}
-                window.castReceiverManager.start({statusText: "Application is starting"});
+		
+                // initialize the CastReceiverManager with an application status message
+        	window.castReceiverManager.start({statusText: "Application is starting"});
+       		console.log('Receiver Manager started');
 		};
 	
 			
